@@ -1,0 +1,200 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: "kotlin-kapt"
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.android.app"
+        multiDexEnabled true
+        minSdkVersion 16
+        targetSdkVersion 28
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    lintOptions {
+        quiet true
+        abortOnError false
+        ignoreWarnings true
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("../keystore/debug.keystore")
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+        release {
+            try {
+                storeFile file("../keystore/release.keystore")
+                storePassword KEYSTORE_PASSWORD
+                keyAlias 'release'
+                keyPassword KEYSTORE_PASSWORD
+            } catch (ignored) {
+                throw new InvalidUserDataException(
+                        "You should define KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.")
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            minifyEnabled false
+            useProguard false
+            signingConfig signingConfigs.debug
+            debuggable true
+            testCoverageEnabled = true
+        }
+    }
+
+    flavorDimensions "full"
+    productFlavors {
+        dev {
+            manifestPlaceholders = [appName: APP_NAME_DEV]
+            dimension "full"
+            buildConfigField "String", "BASE_URL", "\"http://api.worldweatheronline.com\""
+            buildConfigField "Boolean", "IS_PROD_FLAVOR", "false"
+            buildConfigField "String", "WEATHER_API_KEY", "\"4f1e7bda79ea4c878ee91329190108\""
+            buildConfigField "String", "WEATHER_NUM_OF_DAYS", "\"10\""
+            buildConfigField "String", "WEATHER_FX", "\"yes\""
+            buildConfigField "String", "WEATHER_FORMAT", "\"json\""
+            buildConfigField "String", "WEATHER_TP", "\"24\""
+        }
+        prod {
+            manifestPlaceholders = [appName: APP_NAME_PRODUCTION]
+            buildConfigField "String", "BASE_URL", "\"http://api.worldweatheronline.com\""
+            buildConfigField "Boolean", "IS_PROD_FLAVOR", "true"
+            buildConfigField "String", "WEATHER_API_KEY", "\"4f1e7bda79ea4c878ee91329190108\""
+            buildConfigField "String", "WEATHER_NUM_OF_DAYS", "\"10\""
+            buildConfigField "String", "WEATHER_FX", "\"yes\""
+            buildConfigField "String", "WEATHER_FORMAT", "\"json\""
+            buildConfigField "String", "WEATHER_TP", "\"24\""
+
+            dimension "full"
+            def versionPropsFile = file('version.properties')
+            if (versionPropsFile.canRead()) {
+                Properties versionProps = new Properties()
+                versionProps.load(new FileInputStream(versionPropsFile))
+                def code = versionProps['VERSION_CODE'].toInteger() + 1
+                versionProps['VERSION_CODE'] = code.toString()
+                versionProps.store(versionPropsFile.newWriter(), null)
+                versionCode code
+                versionName "$code"
+            } else {
+                throw new GradleException("Could not read version.properties!")
+            }
+        }
+        staging {
+            manifestPlaceholders = [appName: APP_NAME_STAGING]
+            dimension "full"
+            buildConfigField "String", "BASE_URL", "\"http://api.worldweatheronline.com\""
+            buildConfigField "Boolean", "IS_PROD_FLAVOR", "false"
+            buildConfigField "String", "WEATHER_API_KEY", "\"4f1e7bda79ea4c878ee91329190108\""
+            buildConfigField "String", "WEATHER_NUM_OF_DAYS", "\"10\""
+            buildConfigField "String", "WEATHER_FX", "\"yes\""
+            buildConfigField "String", "WEATHER_FORMAT", "\"json\""
+            buildConfigField "String", "WEATHER_TP", "\"24\""
+        }
+    }
+
+    sourceSets {
+        main {
+            res.srcDirs = [
+                    'src/main/res',
+                    'src/main/res/common',
+                    'src/main/res/weather'
+            ]
+            assets.srcDirs = ['src/main/assets']
+            java.srcDirs = ['src/main/kotlin']
+        }
+    }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+    buildToolsVersion = '28.0.3'
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.41"
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.core:core-ktx:1.0.2'
+
+    //Room
+    def room_version = "2.2.0-alpha01" // 2.1.0 for latest stable version
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    // For Kotlin use kapt instead of annotationProcessor
+
+    //RxJava2
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
+
+    implementation 'com.google.firebase:firebase-core:17.0.1'
+
+    //UI
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.google.android.material:material:1.1.0-alpha08'
+
+    //Progress Indicator
+    implementation 'com.wang.avi:library:2.1.3'
+
+    //Image loader
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+
+    //Font
+    implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
+
+    //Rounded ImageView
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    //Android ViewModel
+    implementation 'android.arch.lifecycle:viewmodel:1.1.1'
+
+    //Koin DI
+    implementation 'org.koin:koin-android-viewmodel:2.0.1'
+    implementation 'org.koin:koin-android:2.0.1'
+    implementation 'org.koin:koin-android-scope:2.0.1'
+
+    //Pretty Logger
+    implementation 'com.orhanobut:logger:2.2.0'
+
+    //PlaceHolderView. An alternative component for RecyclerView
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation 'com.mindorks.android:placeholderview:1.0.3'
+    kapt 'com.mindorks.android:placeholderview-compiler:1.0.3'
+
+    //Shimmer for loading status
+    implementation 'com.facebook.shimmer:shimmer:0.4.0'
+
+    //Test
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0-alpha02'
+    testImplementation 'org.mockito:mockito-inline:2.21.0'
+    testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:2.0.0-RC3'
+    testImplementation 'androidx.arch.core:core-testing:2.1.0-rc01'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
+
+    implementation project(path: ':domain')
+    implementation project(path: ':data')
+}

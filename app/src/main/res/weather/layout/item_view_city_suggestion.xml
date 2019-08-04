@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlItemCity"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/baseBackgroundColor"
+    android:theme="@style/ActionHighLight">
+
+    <TextView
+        android:id="@+id/tvCityName"
+        style="@style/Font.RobotoMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/item_view_city_padding"
+        android:layout_marginLeft="@dimen/item_view_city_padding"
+        android:gravity="center"
+        android:padding="@dimen/item_view_city_padding"
+        android:textSize="@dimen/item_view_city_text_size"/>
+
+</RelativeLayout>

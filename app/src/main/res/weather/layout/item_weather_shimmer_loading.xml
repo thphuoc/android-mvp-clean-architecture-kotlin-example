@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlItemRepos"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/baseBackgroundColor"
+    android:padding="@dimen/item_view_city_padding"
+    android:theme="@style/ActionHighLight">
+
+    <ImageView
+        android:id="@+id/imgWeather"
+        android:layout_width="@dimen/item_view_weather_icon_size"
+        android:layout_height="@dimen/item_view_weather_icon_size"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:background="@color/shimmerLoadingBackground" />
+
+    <TextView
+        android:id="@+id/tvObservationTimeLabel"
+        style="@style/Font.RobotoMedium"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/item_view_city_padding"
+        android:layout_marginLeft="@dimen/item_view_city_padding"
+        android:layout_toEndOf="@id/imgWeather"
+        android:layout_toRightOf="@id/imgWeather"
+        android:background="@color/shimmerLoadingBackground"
+        android:textSize="@dimen/item_view_weather_title_text_size" />
+
+    <TextView
+        android:id="@+id/tvHumidityLabel"
+        style="@style/Font.RobotoMedium"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="3dp"
+        android:background="@color/shimmerLoadingBackground"
+        android:textSize="@dimen/item_view_weather_title_text_size" />
+
+    <TextView
+        android:id="@+id/tvWeatherDescLabel"
+        style="@style/Font.RobotoMedium"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgWeather"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10dp"
+        android:background="@color/shimmerLoadingBackground"
+        android:textSize="@dimen/item_view_weather_title_text_size" />
+
+    <TextView
+        android:id="@+id/tvObservationTimeValue"
+        style="@style/Font.RobotoRegular"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvObservationTimeLabel"
+        android:layout_alignStart="@id/tvObservationTimeLabel"
+        android:layout_marginTop="3dp"
+        android:layout_alignLeft="@id/tvObservationTimeLabel"
+        android:layout_toEndOf="@id/imgWeather"
+        android:layout_toRightOf="@id/imgWeather"
+        android:background="@color/shimmerLoadingBackground"
+        android:textSize="@dimen/item_view_weather_desc_text_size"/>
+
+    <TextView
+        android:id="@+id/tvHumidityValue"
+        style="@style/Font.RobotoRegular"
+        android:layout_width="70dp"
+        android:layout_marginTop="3dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvHumidityLabel"
+        android:layout_alignStart="@id/tvHumidityLabel"
+        android:layout_alignLeft="@id/tvHumidityLabel"
+        android:layout_toEndOf="@id/tvObservationTimeValue"
+        android:layout_toRightOf="@id/tvObservationTimeValue"
+        android:background="@color/shimmerLoadingBackground"
+        android:textSize="@dimen/item_view_weather_desc_text_size"/>
+
+    <TextView
+        android:id="@+id/tvWeatherDescValue"
+        style="@style/Font.RobotoRegular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:layout_below="@id/tvWeatherDescLabel"
+        android:background="@color/shimmerLoadingBackground"
+        android:textSize="@dimen/item_view_weather_desc_text_size"/>
+
+</RelativeLayout>

@@ -1,0 +1,25 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="Font.RobotoMedium" parent="android:TextAppearance">
+        <item name="fontPath">fonts/roboto_medium.ttf</item>
+    </style>
+
+    <style name="Font.RobotoRegular" parent="android:TextAppearance">
+        <item name="fontPath">fonts/roboto_regular.ttf</item>
+    </style>
+
+    <style name="ActionHighLight">
+        <item name="colorControlActivated">
+            @color/textColorLight
+        </item>
+        <item name="android:background">?attr/selectableItemBackgroundBorderless</item>
+    </style>
+</resources>

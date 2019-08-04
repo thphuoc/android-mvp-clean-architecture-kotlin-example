@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="lb_observation_time">Observation Time</string>
+    <string name="lb_humidity">Humidity</string>
+    <string name="lb_weather_desc">Description</string>
+    <string name="hint_search_city">Search a city</string>
+    <string name="btn_search">Search</string>
+    <string name="lb_weather_indicator">Please search a city to view weather</string>
+    <string name="lb_city_not_found">Unable to find any matching weather location to the query submitted!</string>
+</resources>

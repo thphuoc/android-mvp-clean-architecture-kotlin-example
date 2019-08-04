@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                     xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                     android:layout_width="match_parent"
+                                                     android:layout_height="match_parent"
+                                                     android:background="@color/baseBackgroundColor"
+                                                     android:fitsSystemWindows="true">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/item_view_weather_padding">
+
+        <androidx.cardview.widget.CardView
+                android:id="@+id/llToolBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/cardview_light_background"
+                app:cardCornerRadius="28dp"
+                app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/actionbar_height"
+                    android:orientation="horizontal">
+
+
+                <EditText
+                        android:id="@+id/edtSearchCity"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:drawableStart="@drawable/ic_search_black_24dp"
+                        android:drawableLeft="@drawable/ic_search_black_24dp"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_vertical"
+                        android:hint="@string/hint_search_city"
+                        android:singleLine="true"
+                        android:padding="10dp"
+                        android:textColor="@color/textColorDark"
+                        android:textColorHint="@color/textColorLight"/>
+
+                <TextView
+                        android:id="@+id/btnSearch"
+                        style="@style/Font.RobotoMedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="10dp"
+                        android:gravity="center"
+                        android:text="@string/btn_search"
+                        android:theme="@style/ActionHighLight"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp"
+                        android:layout_marginRight="10dp"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <com.mindorks.placeholderview.PlaceHolderView
+                android:id="@+id/rvSuggestionCities"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/llToolBar"/>
+
+        <TextView
+                android:layout_centerInParent="true"
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lb_weather_indicator"
+                android:textSize="@dimen/lb_weather_indicator_text_size"/>
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
